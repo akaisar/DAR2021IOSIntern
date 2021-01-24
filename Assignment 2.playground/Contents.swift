@@ -9,11 +9,11 @@ print(array)
 
 func getDictionaryByString(string: String) -> [Character: Int] {
     var dict = [Character: Int]()
-    for i in string {
-        if dict[i] != nil{
-            dict[i]! += 1
+    string.map {
+        if dict[$0] != nil {
+            dict[$0]! += 1
         } else {
-            dict[i] = 1
+            dict[$0] = 1
         }
     }
     return dict
@@ -24,12 +24,8 @@ print(getDictionaryByString(string: "Hello world"))
 
 func getStringWithUpperCase(stringsWithBlanks: String) -> [String] {
     let strings = stringsWithBlanks.split(separator: " ")
-    var stringsWithUpperCase = [String]()
-    for string in strings {
-        if string[string.startIndex].isUppercase {
-            stringsWithUpperCase.append(String(string))
-        }
+    return strings.compactMap {
+        $0[$0.startIndex].isUppercase ? String($0) : nil
     }
-    return stringsWithUpperCase
 }
 print(getStringWithUpperCase(stringsWithBlanks: "Hello world! Today is a great day for coding!"))
